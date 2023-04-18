@@ -1,0 +1,79 @@
+#!/bin/bash
+###########################################################
+# Help
+###########################################################
+Help()
+{
+    #Display Help
+    echo
+    echo "Set a sleep timer for Spotify"
+    echo
+    echo "Syntax: xaislep [-t #|-m #]"
+    echo "Can only do minutes or hours, not both"
+    echo
+    echo "options:"
+    echo "h         Shows this."
+    echo "t         Sets the hours."
+    echo "m         Sets the minutes."
+    echo
+    exit
+}
+
+###########################################################
+###########################################################
+# The bit that does the thing
+###########################################################
+###########################################################
+
+#set variables
+hour=0
+minutes=0
+
+# toggle Spotify
+ToggleSpot()
+{
+    dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+}
+
+# doing the thing
+Sleeping()
+{
+    # calculate the total sleep time in seconds
+    sleep_time=$((${hour}*3600 + ${minutes}*60))
+
+    start_time=$(date +'%R')
+    end_time=$(date -d "+${hour} hour +${minutes} minutes" +'%R')
+
+    echo "Sleeping for ${hour} hours and ${minutes} minutes..."
+    echo "Timer started at ${start_time}."
+    echo "Timer will end at ${end_time}."
+
+    # sleep for the specified amount of time
+    sleep ${sleep_time}
+
+    # toggle Spotify
+    ToggleSpot
+    echo "Slep well. Toggled Spotify."
+    exit
+}
+
+while getopts ":h|:t:|:m:" option; do
+    case $option in
+        h) # display help
+            Help
+            ;;
+        t) # set hours
+            hour=$OPTARG
+            Sleeping
+            ;;
+        m) #set minutes
+            minutes=$OPTARG
+            Sleeping
+            ;;
+        \?) # invalid option
+            echo "Error: Invalid option"
+            exit;;
+    esac
+done
+
+
