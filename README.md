@@ -8,6 +8,8 @@ I also am new to linux, just replaced Windows as my main OS a month ago.
 
 If anyone knows how to make both minutes and hours work, please pull request!
 
+(I was told today how to fix it properly, but im not big brain enough to do it rn. will be looking into and maybe updating this soonish)
+
     "Set a sleep timer for Spotify"
     
     "Syntax: xaislep [-t #|-m #]"
