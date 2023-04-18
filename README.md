@@ -2,10 +2,9 @@
 Spotify sleep timer for linux
 
 
-Im not a very good code person
-This is the best I could do with my limited knowledge
-I also am new to linux
-Just replaced Windows as my main OS a month ago
+Im not a very good code person.
+This is the best I could do with my limited knowledge.
+I also am new to linux, just replaced Windows as my main OS a month ago.
 
 If anyone knows how to make both minutes and hours work, please pull request!
 
